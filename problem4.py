@@ -32,7 +32,14 @@ def count_words(filename):
     """
     # TODO: Open file and count words
     # Hint: Use split() to separate words
-    pass
+    try:
+        with open(filename, 'r') as f:
+            content = f.read()
+        words = content.split()
+        return len(words)
+    except FileNotFoundError:
+        print(f"File '{filename}' not found.")
+        return 0
 
 
 def count_lines(filename):
@@ -46,7 +53,13 @@ def count_lines(filename):
         int: Total number of lines
     """
     # TODO: Open file and count lines
-    pass
+    try:
+        with open(filename, 'r') as f:
+            lines = f.readlines()
+        return len(lines)
+    except FileNotFoundError:
+        print(f"File '{filename}' not found.")
+        return 0
 
 
 def count_characters(filename, include_spaces=True):
@@ -62,7 +75,17 @@ def count_characters(filename, include_spaces=True):
     """
     # TODO: Open file and count characters
     # If include_spaces is False, don't count spaces
-    pass
+    try:
+        with open(filename, 'r') as f:
+            content = f.read()
+            
+        if include_spaces:
+            return len(content)
+        else:
+            return len(content.replace(" ", ""))
+    except FileNotFoundError:
+        print(f"File '{filename}' not found.")
+        return 0
 
 
 def find_longest_word(filename):
@@ -77,7 +100,21 @@ def find_longest_word(filename):
     """
     # TODO: Find the longest word
     # Hint: You might need to remove punctuation
-    pass
+    try:
+        with open(filename, 'r') as f:
+            content = f.read()
+
+        translator = str.maketrans('', '', string.punctuation)
+        content = content.translate(translator)
+
+        words = content.split()
+
+        longest_word = max(words, key=len) if words else ""
+        return longest_word
+
+    except FileNotFoundError:
+        print(f"File '{filename}' not found.")
+        return ""
 
 
 def word_frequency(filename):
@@ -101,6 +138,30 @@ def word_frequency(filename):
     # TODO: Remove punctuation (use string.punctuation)
     # TODO: Count frequency of each word
 
+    try:
+        with open(filename, 'r') as f:
+            content = f.read()
+
+        # Convertir en minuscules
+        content = content.lower()
+
+        # Supprimer la ponctuation
+        translator = str.maketrans('', '', string.punctuation)
+        content = content.translate(translator)
+
+        # Séparer en mots
+        words = content.split()
+
+        # Compter la fréquence
+        for word in words:
+            if word in frequency:
+                frequency[word] += 1
+            else:
+                frequency[word] = 1
+
+    except FileNotFoundError:
+        print(f"File '{filename}' not found.")
+    
     return frequency
 
 
