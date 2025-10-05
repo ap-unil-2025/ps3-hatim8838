@@ -58,15 +58,16 @@ def temperature_converter():
     unit = input("Enter the current unit (C/F): ").strip().upper()
     if unit == "C":
         result = celsius_to_fahrenheit(temp)
-        print(f"{temp:.2f}°C is {result:.2f}°F")
+        print(f"{round(temp,2)}°C is {round(result,2)}°F")
     elif unit == "F":
         result = fahrenheit_to_celsius(temp)
-        print(f"{temp:.2f}°F is {result:.2f}°C")
+        print(f"{round(temp,2)}°F is {round(result,2)}°C")
     else:
         print("Invalid unit! Please enter 'C' or 'F'.")
-        
+
     except ValueError:
         print("Invalid input! Please enter a numeric value for the temperature.")
+
     
 # Test cases (DO NOT MODIFY)
 if __name__ == "__main__":
